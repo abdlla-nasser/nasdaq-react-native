@@ -1,35 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import { NavigationContainer, RouteProp } from '@react-navigation/native';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { getYesterday } from "./helpers";
 import { getStock } from "./api";
 import { useEffect } from 'react';
+import { Home } from "./screens/Home";
 
 type RootStackParamList = {
   Home: undefined;
   Details: { ticker: string };
 };
-type Props = {
+export type NavProps = {
   navigation: StackNavigationProp<
     RootStackParamList
   >
   route: RouteProp<RootStackParamList, "Details">;
 };
 
-function HomeScreen({ navigation }: Props) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details', { ticker: "AAPL" })}
-      />
-    </View>
-  );
-}
-function DetailsScreen({ route }: Props) {
+function DetailsScreen({ route }: NavProps) {
   const { params: { ticker } } = route;
   useEffect(() => {
     getStock(ticker, getYesterday()).then(console.log)
@@ -47,7 +37,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
