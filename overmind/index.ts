@@ -7,7 +7,8 @@ import {
 } from 'overmind-react'
 import { state } from "./state";
 import * as actions from "./actions"
-export const config = { state, actions }
+import { effects } from "./effects";
+export const config = { state, actions, effects }
 export type Context = IContext<typeof config>
 
 export const useAppState = createStateHook<Context>()

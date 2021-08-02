@@ -10,6 +10,7 @@ import { getYesterday } from "./helpers";
 import { getStock } from "./api";
 import { useEffect } from 'react';
 import { Home } from "./screens/Home";
+import { DetailsScreen } from "./screens/StockDetails"
 
 type RootStackParamList = {
   Home: undefined;
@@ -23,17 +24,17 @@ export type NavProps = {
 };
 const overmindConfig = createOvermind(config)
 
-function DetailsScreen({ route }: NavProps) {
-  const { params: { ticker } } = route;
-  useEffect(() => {
-    getStock(ticker, getYesterday()).then(console.log)
-  }, [ticker])
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen for {ticker}</Text>
-    </View>
-  );
-}
+// function DetailsScreen({ route }: NavProps) {
+//   const { params: { ticker } } = route;
+//   useEffect(() => {
+//     getStock(ticker, getYesterday()).then(console.log)
+//   }, [ticker])
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//       <Text>Details Screen for {ticker}</Text>
+//     </View>
+//   );
+// }
 const Stack = createStackNavigator();
 
 
