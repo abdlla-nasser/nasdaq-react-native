@@ -53,7 +53,7 @@ export const Home = ({ navigation }: NavProps) => {
         <StyledInput value={search} onChangeText={(e) => setSearchTerm(e)} placeholder="Search" />
       </InputBox>
       <StyledList onEndReachedThreshold={.3} onEndReached={getNextStocks} data={stocks} keyExtractor={item => item.ticker} renderItem={({ item }) => (
-        <Item>
+        <Item onPress={() => navigation.navigate("Details", { ticker: item.ticker })}>
           <View>
             <Text>{item.name}</Text>
           </View>

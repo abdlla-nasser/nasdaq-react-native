@@ -12,6 +12,7 @@ export async function getStock(ticker: String, date: String) {
     return res.data
   })
   let openClose = await axiosService.get(`v1/open-close/${ticker}/${date}?adjusted=true`).then(res => res.data)
+  console.log({ ...details, ...openClose})
   return { ...details, ...openClose}
 }
 export async function getStocks(next?: string) {
@@ -23,8 +24,11 @@ export async function getStocks(next?: string) {
     let stocks = res.results
     return {nextUrl, stocks}
   } else {
-    res = await axiosService.get(`v3/reference/tickers?active=true&sort=ticker&order=asc&limit=10`)
-      .then(res => res.data)
+    res = await axiosService.get(`v3/reference/tickers?market=stocks&exchange=XNAS&active=true&sort=ticker&order=asc&limit=10`)
+      .then(res => {
+        console.log(res.data)
+        return res.data
+      })
   }
   let nextUrl = res["next_url"]
   let stocks = res.results

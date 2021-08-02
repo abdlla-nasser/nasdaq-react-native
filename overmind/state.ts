@@ -16,7 +16,9 @@ export type State = {
   isLoadingStock: boolean;
   isLoadingStocks: boolean;
   stocks: Stock[];
-  stocksDetails: {};
+  stocksDetails: {
+    [key: string]: Stock
+  };
   search: string;
   nextUrl: string
 }
