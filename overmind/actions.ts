@@ -8,6 +8,7 @@ export const getStockDetails = async ({ state, effects }: Context, { ticker, dat
 export const getStocks = async({ state, effects }: Context) => {
   state.isLoadingStocks = true;
   let { nextUrl, stocks } = await effects.getStocks()
+  console.log("overmind", stocks)
   state.stocks = stocks;
   state.nextUrl = nextUrl;
   state.isLoadingStocks = false;
@@ -15,7 +16,13 @@ export const getStocks = async({ state, effects }: Context) => {
 export const getNextStocks = async ({ state, effects }: Context) => {
   state.isLoadingStocks = true;
   let { nextUrl, stocks } = await effects.getStocks(state.nextUrl)
-  state.stocks.concat(stocks)
+  state.stocks = state.stocks.concat(stocks)
   state.nextUrl = nextUrl
   state.isLoadingStocks = false;
+}
+export const setSearchTerm = ({ state }: Context, searchTerm: string) => {
+  state.search = searchTerm
+  if (searchTerm.length > 3) {
+    // search
+  }
 }

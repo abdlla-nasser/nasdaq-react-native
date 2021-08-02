@@ -8,7 +8,6 @@ export const DetailsScreen = ({ route }: NavProps) => {
   const { params: { ticker } } = route;
   const { getStockDetails } = useActions()
   useEffect(() => {
-    getStockDetails()
     getStock(ticker, getYesterday()).then(console.log)
   }, [ticker])
   return (
